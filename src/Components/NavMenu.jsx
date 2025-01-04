@@ -13,8 +13,8 @@ const NavMenu = () => {
     }
   return (
     <>
-    <Box component="div" style={{backgroundColor:'azure', width:"258px", height:"50px", borderRadius:"20px", display:"flex", justifyContent:"space-between",alignItems:"center", position:'relative'}}>
-        <div className="indicator"  style={{left:`${indicatorPos}px`}}></div>
+    <Box component="div" sx={{backgroundColor:"primary.extra"}} style={{width:"258px", height:"50px", borderRadius:"20px", display:"flex", justifyContent:"space-between",alignItems:"center", position:'relative'}}>
+        <div className="indicator" style={{left:`${indicatorPos}px`}}></div>
         <NavLink to='/' onClick={()=>{moveHandler(0)}}>Login</NavLink>
         <NavLink to='/signup' onClick={()=>{moveHandler(129)}}>SignUp</NavLink>  
     </Box>

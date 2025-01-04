@@ -11,14 +11,14 @@ const Login = () => {
     <>
     <Grid container direction="row" sx={{height:"100vh",backgroundColor:"grey",'@media (max-width:599px)': { height: 'auto' },}}>
         
-        <Grid size={{xs:12, sm:6}} sx={{height:"100%",backgroundColor:"green", display:"flex",justifyContent:"center",alignItems:"center"}}>
+        <Grid size={{xs:12, sm:4}} sx={{height:"100%",backgroundColor:"primary.main", display:"flex",justifyContent:"center",alignItems:"center"}}>
             <Box sx={{display:"flex",flexDirection:'column',justifyContent:"center",alignItems:"center"}}>
                 <Box component="img" src={phonemsg} alt="people texting" sx={{width: { xs: '200px', sm:'300px', md:'414px'}, }}></Box>
                 <NavMenu/>
             </Box>
         </Grid>
         
-        <Grid size={{xs:12,sm:6}} sx={{height:"100%",backgroundColor:"darkgreen"}}>
+        <Grid size={{xs:12,sm:8}} sx={{height:"100%",backgroundColor:"primary.light"}}>
             <Outlet/>
         </Grid>
     </Grid>

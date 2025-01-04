@@ -1,8 +1,8 @@
 import React from 'react'
-
+import MsgContainer from '../Components/MsgContainer'
 const Login = () => {
   return (
-    <div>Login</div>
+    <MsgContainer title="Welcome back" subtitle="Enter your details below"/>
   )
 }
 
