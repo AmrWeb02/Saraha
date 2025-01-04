@@ -1,0 +1,12 @@
+a{
+    text-decoration: none;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 20px;
+    width: 129px;
+}
+a.active{
+    background-color: beige;
+
+}

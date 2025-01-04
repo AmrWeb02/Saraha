@@ -7,10 +7,12 @@ import {NavLink, Route, RouterProvider, createBrowserRouter, createRoutesFromEle
 // Pages
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
+// Component
+import NavigationBar from './Layout/GirdLayout'
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
+      <Route element={<NavigationBar/>}>
         <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
       </Route>
