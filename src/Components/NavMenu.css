@@ -5,8 +5,15 @@ a{
     line-height: 50px;
     border-radius: 20px;
     width: 129px;
+    z-index: 2;
 }
-a.active{
+.indicator{
+    width: 129px;
+    height: 50px;
+    border-radius: 20px;
     background-color: beige;
-
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+    transition: all 0.3s ease;
 }
