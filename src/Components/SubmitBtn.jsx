@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 
-const SubmitBtn = ({label}) => {
+const SubmitBtn = ({label, isValid, formValidator}) => {
     const BtnStyles = {
         height: "50px",
         borderRadius: "20px",
@@ -18,7 +18,7 @@ const SubmitBtn = ({label}) => {
     }
   return (
     <>
-    <Box component="input" type="submit" value={label} sx={BtnStyles}/>
+    <Box component="input" type="submit" value={label} sx={BtnStyles} onClick={formValidator}/>
     </>
 
   )

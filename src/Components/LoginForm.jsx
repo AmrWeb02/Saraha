@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 // Components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -26,22 +26,64 @@ export const styleObj = {
                     },
 }
 const LoginForm = () => {
+  const [data, setData] = useState({email:"",password:""});
+  const [ErrorData, setErrorData] = useState({email:false, password:false,});
+  const [ErrorNames, setErrorNames] = useState({username:"", email:"", phone:"", password:"", confirmationPassword:""});
+  const dataEntryHandler = (e) =>{
+    setData({...data, [e.target.name]:e.target.value});
+    // setErrorData((prevErrorData)=> {return {...prevErrorData, [e.target.name]:false}}); Running this on every keystroke to reset errors is not the best way to do it.
 
+    // if(ErrorData.email==true || ErrorData.password==true){ Can be computationally expensive when form has many fields
+    //   setErrorData((prevErrorData)=> {return {...prevErrorData, [e.target.name]:false}});
+    // }
+  }
+  const formValidator = (e) =>{
+    e.preventDefault();
+    if( (data.email !=="") && (data.password !=="") ){
+      console.log("Login data is sent to server")
+    }
+    if(data.email.trim()===""){
+      setErrorData((prevErrorData)=> {return {...prevErrorData, email:true}});
+      setErrorNames((prevErrorNames) => {return {...prevErrorNames, email:"Empty Field"}})
+      console.log('email problem');
+      console.log(ErrorData);
+    }
+    if(data.password.trim()===""){
+      setErrorData((prevErrorData)=> {return {...prevErrorData, password:true}});
+      setErrorNames((prevErrorNames) => {return {...prevErrorNames, password:"Empty Field"}})
+      console.log("password problem");
+    }
+  }
+  const errorReset = (e) =>{
+    setErrorData((prevErrorData)=> {return {...prevErrorData, [e.target.name]:false}});
+    setErrorNames((prevErrorData)=> {return {...prevErrorData, [e.target.name]:false}});
+  }
   return (
     <>
-      <Box component="form" autoComplete='false' style={{display:"flex", flexDirection:"column",alignItems:"center",}}>
+      <Box component="form" style={{display:"flex", flexDirection:"column",alignItems:"center",}}>
         <TextField label="Email" variant='outlined'
-                   required
+                   type="email"
                    sx={styleObj}
                    style={{marginBottom:"15px", width:"300px"}}
+                   name='email'
+                   value={data.email}
+                   onChange={dataEntryHandler}
+                   onBlur={errorReset}
+                   error={ErrorData.email}
+                   helperText={ErrorNames.email}
         />
         <TextField label="Password" variant='outlined'
-                   required
                    type="password"
                    sx={styleObj}
                    style={{marginBottom:"15px", width:"300px"}}
+                   name='password'
+                   value={data.password}
+                   onChange={dataEntryHandler}
+                   onBlur={errorReset}
+                   error={ErrorData.password}
+                   helperText={ErrorNames.password}
         />
-        <SubmitBtn label="Login"/>
+        <SubmitBtn label="Login" formValidator={formValidator}/>
       </Box>
     </>
   )
