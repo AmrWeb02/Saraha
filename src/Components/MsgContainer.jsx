@@ -12,7 +12,6 @@ const MsgContainer = ({title,subtitle}) => {
         </Box>
         <Box component="img" src={phone} alt={phone} sx={{ width: {sm:"60px", md:"80px", lg:"100px"}, height:{sm:"60px", md:"80px", lg:"100px"}}}></Box>
     </Box>
-
     </>
   )
 }

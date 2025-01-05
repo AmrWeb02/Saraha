@@ -19,7 +19,8 @@ const theme = createTheme({
       dark:"#A6C88B",
       accent:"#B3FBA9",
       extra:"#BFD8AF",
-      white:"#ffffff"
+      white:"#ffffff",
+      inputColor:"#F6F9F4",
     }
   }
 })
