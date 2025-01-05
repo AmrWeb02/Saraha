@@ -21,6 +21,10 @@ const theme = createTheme({
       extra:"#BFD8AF",
       white:"#ffffff",
       inputColor:"#F6F9F4",
+    },
+    secondary:{
+      main:"#A2AE6A",
+
     }
   }
 })

@@ -11,16 +11,17 @@ const Login = () => {
     <>
     <Grid container direction="row" sx={{height:"100vh",backgroundColor:"grey",'@media (max-width:599px)': { height: 'auto' },}}>
         
-        <Grid size={{xs:12, sm:4}} sx={{height:"100%",backgroundColor:"primary.main", display:"flex",justifyContent:"center",alignItems:"center"}}>
-            <Box sx={{display:"flex",flexDirection:'column',justifyContent:"center",alignItems:"center"}}>
-                <Box component="img" src={phonemsg} alt="people texting" sx={{width: { xs: '200px', sm:'300px', md:'414px'}, }}></Box>
+        <Grid size={{xs:12, sm:4}} sx={{backgroundColor:"primary.dark", display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <Box sx={{display:"flex",flexDirection:'column',justifyContent:"center",alignItems:"center", marginBottom:"40px"}}>
+                <Box component="img" src={phonemsg} alt="people texting" sx={{width: { xs: '200px', sm:'210px', md:'380px'}, }}></Box>
                 <NavMenu/>
             </Box>
         </Grid>
         
-        <Grid size={{xs:12,sm:8}} sx={{height:"100%",backgroundColor:"primary.light"}}>
+        <Grid size={{xs:12,sm:8}} sx={{minHeight:"600px",backgroundColor:"primary.main",}}>
             <Outlet/>
         </Grid>
+
     </Grid>
     </>
   )
