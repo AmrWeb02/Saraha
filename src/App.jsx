@@ -10,7 +10,16 @@ import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
 // Component
 import NavigationBar from './Layout/GirdLayout'
-
+// Send LoginForm
+export const sendLogin = async (jsondata) =>{
+  const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/login',{
+    method: "POST",
+    body: JSON.stringify(jsondata),
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+}
 const theme = createTheme({
   palette:{
     primary:{
@@ -31,11 +40,11 @@ const theme = createTheme({
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<NavigationBar/>}>
+      <Route path='/' element={<NavigationBar/>}>
         <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
       </Route>
-    )
+    ), { basename: '/Saraha' }
   )
   return (
     <>

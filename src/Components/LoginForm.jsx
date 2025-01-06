@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SubmitBtn from './SubmitBtn.jsx'
+import { sendLogin } from '../App.jsx';
 export const styleObj = {
   backgroundColor:"primary.inputColor",
                     "& .MuiOutlinedInput-root": {
@@ -40,7 +41,8 @@ const LoginForm = () => {
   const formValidator = (e) =>{
     e.preventDefault();
     if( (data.email !=="") && (data.password !=="") ){
-      console.log("Login data is sent to server")
+      console.log("Login data is sent to server");
+      sendLogin(data);
     }
     if(data.email.trim()===""){
       setErrorData((prevErrorData)=> {return {...prevErrorData, email:true}});
