@@ -1,0 +1,1 @@
+*{box-sizing:border-box;margin:0;padding:0}#root{height:100vh}a{text-decoration:none;text-align:center;height:50px;line-height:50px;border-radius:20px;width:105px;z-index:2;color:#fff;font-weight:700}.indicator{width:105px;height:50px;border-radius:20px;background-color:#396b1c;position:absolute;left:0;z-index:1;transition:all .3s ease}
