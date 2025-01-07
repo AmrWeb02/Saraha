@@ -12,13 +12,25 @@ import SignUp from './Pages/SignUp'
 import NavigationBar from './Layout/GirdLayout'
 // Send LoginForm
 export const sendLogin = async (jsondata) =>{
-  const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/login',{
-    method: "POST",
-    body: JSON.stringify(jsondata),
-    headers: {
-      "Content-type": "application/json",
-    },
-  })
+  try{
+    const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/login',{
+      method: "POST",
+      body: JSON.stringify(jsondata),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+    if(!response.ok){
+      const errorDetails = await response.json();
+      for( const error of errorDetails.validationError){
+        console.log(error.message);
+      }
+      console.log(errorDetails.validationError);
+    }
+  }
+  catch(err){
+    console.log(`Failed to connect to the: ${err}`)
+  }
 }
 const theme = createTheme({
   palette:{
