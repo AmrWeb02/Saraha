@@ -22,10 +22,7 @@ export const sendLogin = async (jsondata) =>{
     })
     if(!response.ok){
       const errorDetails = await response.json();
-      for( const error of errorDetails.validationError){
-        console.log(error.message);
-      }
-      console.log(errorDetails.validationError);
+      return errorDetails.validationError; 
     }
   }
   catch(err){

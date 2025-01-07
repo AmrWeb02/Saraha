@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import { ToastContainer, toast } from 'react-toastify';
 // Components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -31,6 +31,7 @@ const LoginForm = () => {
   const [data, setData] = useState({email:"",password:""});
   const [ErrorData, setErrorData] = useState({email:false, password:false,});
   const [ErrorNames, setErrorNames] = useState({username:"", email:"", phone:"", password:"", confirmationPassword:""});
+  let responseErrors; // Array of objects, each object contains error message
   const dataEntryHandler = (e) =>{
     setData({...data, [e.target.name]:e.target.value});
     // setErrorData((prevErrorData)=> {return {...prevErrorData, [e.target.name]:false}}); Running this on every keystroke to reset errors is not the best way to do it.
@@ -39,11 +40,19 @@ const LoginForm = () => {
     //   setErrorData((prevErrorData)=> {return {...prevErrorData, [e.target.name]:false}});
     // }
   }
-  const formValidator = (e) =>{
+  const toastMaker = (responseErrors) =>{
+    for(let err of responseErrors ){
+      toast.error(err.message);
+      console.log(err.message);
+    }
+  }
+  const formValidator = async (e) =>{
     e.preventDefault();
     if( (data.email !=="") && (data.password !=="") ){
       console.log("Login data is sent to server");
-      sendLogin(data);
+      responseErrors= await sendLogin(data);
+      toastMaker(responseErrors);
+      console.log(responseErrors);
     }
     if(data.email.trim()===""){
       setErrorData((prevErrorData)=> {return {...prevErrorData, email:true}});
@@ -87,6 +96,7 @@ const LoginForm = () => {
                    helperText={ErrorNames.password}
         />
         <SubmitBtn label="Login" formValidator={formValidator}/>
+        <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/>
       </Box>
     </>
   )
