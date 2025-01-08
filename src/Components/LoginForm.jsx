@@ -6,7 +6,8 @@ import TextField from '@mui/material/TextField';
 import { InputAdornment } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SubmitBtn from './SubmitBtn.jsx'
-import { sendLogin } from '../App.jsx';
+// Methods
+import { sendData } from '../App.jsx';
 export const styleObj = {
   backgroundColor:"primary.inputColor",
                     "& .MuiOutlinedInput-root": {
@@ -41,16 +42,22 @@ const LoginForm = () => {
     // }
   }
   const toastMaker = (responseErrors) =>{
-    for(let err of responseErrors ){
-      toast.error(err.message);
-      console.log(err.message);
+    try{
+      for(let err of responseErrors ){
+        toast.error(err.message);
+        console.log(err.message);
+      }
     }
+    catch(err){
+      console.log(" Failed to reach server, failed to retrieve response errors");
+    }
+
   }
   const formValidator = async (e) =>{
     e.preventDefault();
     if( (data.email !=="") && (data.password !=="") ){
       console.log("Login data is sent to server");
-      responseErrors= await sendLogin(data);
+      responseErrors= await sendData('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/login',data);
       toastMaker(responseErrors);
       console.log(responseErrors);
     }

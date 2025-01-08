@@ -10,10 +10,11 @@ import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
 // Component
 import NavigationBar from './Layout/GirdLayout'
-// Send LoginForm
-export const sendLogin = async (jsondata) =>{
+import EmailConfirm from './Pages/EmailConfirm'
+// Send Login AND signUp data
+export const sendData = async (url,jsondata) =>{
   try{
-    const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/login',{
+    const response = await fetch(url,{
       method: "POST",
       body: JSON.stringify(jsondata),
       headers: {
@@ -49,10 +50,14 @@ const theme = createTheme({
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
+      <>
       <Route path='/' element={<NavigationBar/>}>
         <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
       </Route>
+      <Route path='/email-confirmation' element={<EmailConfirm/>}/>      
+      </>
+
     ), { basename: '/Saraha' }
   )
   return (

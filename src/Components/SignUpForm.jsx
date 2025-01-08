@@ -1,32 +1,46 @@
 import React, {useState} from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+
 // Styles
 import { styleObj } from './LoginForm'
 // Components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import SubmitBtn from './SubmitBtn.jsx'
+// Methods
+import { sendData } from '../App.jsx';
 const SignUpForm = () => {
-    const [data, setData] = useState({username:"",email:"",phone:"",password:"",confirmationPassword:""});
-    const [ErrorData, setErrorData] = useState({username:false, email:false, phone:false, password:false, confirmationPassword:false});
-    const [ErrorNames, setErrorNames] = useState({username:"", email:"", phone:"", password:"", confirmationPassword:""});
+    const [data, setData] = useState({userName:"",email:"",password:"", phone:"", confirmationPassword:""});
+    const [ErrorData, setErrorData] = useState({userName:false, email:false, phone:false, password:false, confirmationPassword:false});
+    const [ErrorNames, setErrorNames] = useState({userName:"", email:"", phone:"", password:"", confirmationPassword:""});
+    let responseErrors; // Array of objects, each object contains error message
 
     const dataEntryHandler = (e) =>{
       setData({...data, [e.target.name]:e.target.value});
     }
-    const formValidator = (e) =>{
+      const toastMaker = (responseErrors) =>{
+        for(let err of responseErrors ){
+          toast.error(err.message);
+          console.log(err.message);
+        }
+      }
+    const formValidator = async (e) =>{
       e.preventDefault();
-      if( (data.email.trim() !=="") && (data.password !=="") && (data.confirmationPassword !=="") && (data.username !=="") && (data.phone !=="") ){
+      if( (data.email.trim() !=="") && (data.password !=="") && (data.confirmationPassword !=="") && (data.userName !=="") && (data.phone !=="") ){
         if(data.password==data.confirmationPassword){
-          console.log("Sign up data is sent to server")
+          console.log("Sign up data is sent to server");
+          responseErrors= await sendData('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/signup',data);
+          toastMaker(responseErrors);
+          console.log(responseErrors);
         }
         else{
           setErrorData((prevErrorData)=> {return {...prevErrorData, confirmationPassword:true}});
           setErrorNames((prevErrorNames) => {return {...prevErrorNames, confirmationPassword:"Password mismatch!"}})
         }
       }
-      if(data.username.trim()===""){
-        setErrorData((prevErrorData)=> {return {...prevErrorData, username:true}});
-        setErrorNames((prevErrorNames) => {return {...prevErrorNames, username:"Empty Field"}})
+      if(data.userName.trim()===""){
+        setErrorData((prevErrorData)=> {return {...prevErrorData, userName:true}});
+        setErrorNames((prevErrorNames) => {return {...prevErrorNames, userName:"Empty Field"}})
         console.log('username problem');
         console.log(ErrorData);
       }
@@ -61,12 +75,12 @@ const SignUpForm = () => {
     <TextField label="Username" variant="outlined" type="text"
                 sx={styleObj}
                 style={{marginBottom:"15px", width:"300px"}}
-                name="username"
-                value={data.username}
+                name="userName"
+                value={data.userName}
                 onChange={dataEntryHandler}
                 onBlur={errorReset}
-                error={ErrorData.username}
-                helperText={ErrorNames.username}
+                error={ErrorData.userName}
+                helperText={ErrorNames.userName}
                 />
     <TextField label="Email" variant='outlined' type="email"
                sx={styleObj}
@@ -111,6 +125,7 @@ const SignUpForm = () => {
                helperText={ErrorNames.confirmationPassword}
     />
     <SubmitBtn label="SignUp" formValidator={formValidator}/>
+    <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/> 
   </Box>  )
 }
 
