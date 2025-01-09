@@ -19,3 +19,10 @@ a{
     z-index: 1;
     transition: all 0.3s ease;
 }
+.emailBtn{
+    background-color: #A6C88B;
+    transition: all 0.3s ease;
+}
+.emailBtn:hover{
+    background-color: #396B1C;
+}
