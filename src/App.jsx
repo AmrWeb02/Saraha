@@ -23,7 +23,13 @@ export const sendData = async (url,jsondata) =>{
     })
     if(!response.ok){
       const errorDetails = await response.json();
-      return errorDetails.validationError; 
+      console.log(errorDetails);
+      if(errorDetails.message !== 'validation error'){
+        return [errorDetails];
+      }
+      else{
+        return errorDetails.validatoinError;
+      }
     }
   }
   catch(err){
@@ -55,7 +61,7 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
       </Route>
-      <Route path='/email-confirmation' element={<EmailConfirm/>}/>      
+      <Route path='/email-confirmation/confirmEmail/*' element={<EmailConfirm/>}/>      
       </>
 
     ), { basename: '/Saraha' }

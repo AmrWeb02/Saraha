@@ -18,12 +18,20 @@ const SignUpForm = () => {
     const dataEntryHandler = (e) =>{
       setData({...data, [e.target.name]:e.target.value});
     }
-      const toastMaker = (responseErrors) =>{
+    const toastMaker = (responseErrors) =>{
+      console.log("tempArr,", responseErrors);
+      try{
         for(let err of responseErrors ){
+          console.log(err);
           toast.error(err.message);
           console.log(err.message);
         }
       }
+    catch(err){
+      console.log(" Failed to reach server, failed to retrieve response errors");
+    }
+
+  }
     const formValidator = async (e) =>{
       e.preventDefault();
       if( (data.email.trim() !=="") && (data.password !=="") && (data.confirmationPassword !=="") && (data.userName !=="") && (data.phone !=="") ){
