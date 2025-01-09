@@ -20,12 +20,19 @@ const SignUpForm = () => {
     }
     const toastMaker = (responseErrors) =>{
       console.log("tempArr,", responseErrors);
+      console.log(typeof responseErrors);
       try{
-        for(let err of responseErrors ){
-          console.log(err);
-          toast.error(err.message);
-          console.log(err.message);
+        if('successMessage' in responseErrors){
+          toast.success(responseErrors.successMessage);
         }
+        else{
+          for(let err of responseErrors ){
+            console.log(err);
+            toast.error(err.message);
+            console.log(err.message);
+          }
+        }
+
       }
     catch(err){
       console.log(" Failed to reach server, failed to retrieve response errors");

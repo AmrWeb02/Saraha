@@ -31,6 +31,11 @@ export const sendData = async (url,jsondata) =>{
         return errorDetails.validatoinError;
       }
     }
+    else{
+      const errorDetails = await response.json();
+      console.log('successMessage' in errorDetails);
+      return errorDetails;
+    }
   }
   catch(err){
     console.log(`Failed to connect to the: ${err}`)
