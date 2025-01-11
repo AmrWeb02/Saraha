@@ -21,11 +21,22 @@ const OtpInput = ({data,setData}) => {
     }
     const handleKey = (e,index) =>{
       // console.log(e);
-      const newOTP = [...data.OTP];
-      newOTP[index] = "";
-      setData((prevVal) => {return {...prevVal, OTP:newOTP}});
-      if( (e.key === "Backspace") && (index > 0) && (e.target.value==="")){
+      if( (e.key === "Backspace")){
+        const newOTP = [...data.OTP];
+        newOTP[index] = "";
+        setData((prevVal) => {return {...prevVal, OTP:newOTP}});
+        if((index > 0) && (e.target.value==="")){
+          inputRefs.current[index-1].focus();
+        }
+      }
+      else if(e.key ==='ArrowLeft' && index>0){
         inputRefs.current[index-1].focus();
+      }
+      else if(e.key ==='ArrowRight' && index< inputRefs.current.length-1){
+        inputRefs.current[index+1].focus();
+      }
+      else{
+        return;
       }
     }
     const pasteHandler = (e,index) =>{
