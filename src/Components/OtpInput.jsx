@@ -21,6 +21,9 @@ const OtpInput = ({data,setData}) => {
     }
     const handleKey = (e,index) =>{
       // console.log(e);
+      const newOTP = [...data.OTP];
+      newOTP[index] = "";
+      setData((prevVal) => {return {...prevVal, OTP:newOTP}});
       if( (e.key === "Backspace") && (index > 0) && (e.target.value==="")){
         inputRefs.current[index-1].focus();
       }
