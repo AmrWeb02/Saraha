@@ -8,9 +8,10 @@ import { ThemeProvider } from '@mui/material'
 // Pages
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
-// Component
-import NavigationBar from './Layout/GirdLayout'
 import EmailConfirm from './Pages/EmailConfirm'
+import ForgotPassword from './Pages/ForgotPassword'
+// Layout
+import NavigationBar from './Layout/GirdLayout'
 // Send Login AND signUp data
 export const sendData = async (url,jsondata) =>{
   try{
@@ -66,7 +67,8 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
       </Route>
-      <Route path='/email-confirmation/confirmEmail/*' element={<EmailConfirm/>}/>      
+      <Route path='/email-confirmation/confirmEmail/*' element={<EmailConfirm/>}/>   
+      <Route path='/forgot-password' element={<ForgotPassword/>}/>   
       </>
 
     ), { basename: '/Saraha' }

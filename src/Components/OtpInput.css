@@ -1,0 +1,13 @@
+.otp-input{
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border:none;
+    outline:none;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.otp-input:focus{
+    outline:2px solid green;
+}

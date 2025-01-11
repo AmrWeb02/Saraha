@@ -26,3 +26,8 @@ a{
 .emailBtn:hover{
     background-color: #396B1C;
 }
+a.bigWidth{
+    font-weight: 600;
+    color: black;
+    width: 200px;
+}
