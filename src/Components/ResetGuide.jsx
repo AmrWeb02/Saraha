@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Box, Card, CardMedia, CardContent, CardActions, Typography } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { data, NavLink } from 'react-router-dom'
 import SubmitBtn from './SubmitBtn'
 import { FaChevronLeft } from "react-icons/fa6";
 
@@ -24,6 +24,7 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
     }
     else if(step === 2){
       console.log("this is the third step");
+      sendPass(data, setStep, data.token);
     }
     else{
       console.log("strange");
@@ -49,7 +50,7 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
     const sendEmail = async (data, setStep,setData) =>{
       try{
           const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/forget-password1',{
-              method: "POST",
+              method: "PATCH",
               body: JSON.stringify({email:data}),
               headers : {
                   "Content-type":"application/json",
@@ -78,24 +79,45 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
       console.log("Request headers:", { authorization: token.toString() });
       try{
         const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/forget-password2',{
-          method: "POST",
+          method: "PATCH",
           headers: {
-            "authorization" : token.toString(),
+            "Authorization" : token,
+            "Content-type":"application/json",
           },
           body: JSON.stringify({OTP:data}),
         })
-
         if(response.ok){
-          Console.log("Correct OTP, action authorized");
-          setStep( (val) => val+1);
+          console.log("Correct OTP, action authorized");
+          setStep((val)=>{return val+1});
         }
         else{
           console.log("failed attempt");
-
         }
       }
       catch(err){
         console.log(err)
+      }
+    }
+    const sendPass = async (data, setStep, token) =>{
+      try{
+        const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/forget-password3',{
+          method: "PATCH",
+          headers: {
+            "Authorization" : token,
+            "Content-type":"application/json",
+          },
+          body:JSON.stringify({password:data.password, confirmationPassword:data.confirmedPass}),        
+        })
+        if(response.ok){
+          console.log("New password set!");
+          setStep((val)=>{return val+1});
+        }
+        else{
+          console.log("failed attempt");
+        }
+      }
+      catch(err){
+        console.log(err);
       }
     }
 export default ResetGuide
