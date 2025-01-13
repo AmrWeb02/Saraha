@@ -57,6 +57,33 @@ const theme = createTheme({
       main:"#A2AE6A",
 
     }
+  },
+  components:{
+    MuiStepLabel:{
+      styleOverrides:{
+        label:{
+          "&.Mui-active":{
+            fontWeight:"bold",
+            color:"green",
+          },
+          "&.Mui-completed":{
+            color:"green",
+          },
+        }
+      },
+    },
+    MuiStepIcon:{
+      styleOverrides:{
+        root:{
+          fontSize:"2rem",
+          "&.Mui-active":{
+          },
+          "&.Mui-completed":{
+            color:"green",
+          },
+        }
+      },
+    },
   }
 })
 function App() {
