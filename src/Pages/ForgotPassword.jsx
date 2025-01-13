@@ -19,10 +19,13 @@ const ForgotPassword = () => {
         OTP: Array(4).fill(""),
         password:"",
         confirmedPass:"",
+        token:"",
     });
     const steps = ['Request', 'OTP', 'New Password'];
+
     const InputHandler = (e) =>{
-        SetResetData((prevObj) => {return {...prevObj, [e.target.name]:[e.target.value]}});
+        SetResetData((prevObj) => {return {...prevObj, [e.target.name]:e.target.value}});
+        // console.log(resetData);
     }
     return (
     <>
@@ -33,18 +36,16 @@ const ForgotPassword = () => {
     <Stepper activeStep={stepNumber} sx={{width:"100%",}}>
             {steps.map((label) => {return (
                 <Step key={label}>
-                    <StepLabel>
-                        {label}
-                    </StepLabel>
+                    <StepLabel>{label}</StepLabel>
                 </Step>)})}
         </Stepper>
-        {stepNumber===0 && <ResetGuide imglogo ={forgot} title="Forgot Password" subtitle="We'll send you reset instructions through email" label="Reset">
+        {stepNumber === 0 && <ResetGuide data={resetData} setData = {SetResetData} step={stepNumber} setStep = {setStepNumber} imglogo ={forgot} title="Forgot Password" subtitle="We'll send you reset instructions through email" label="Reset">
             <TextField label="Enter your email" type='email' sx={{...styleObj, width:"300px"}} name="email" value={resetData.email} onChange={(e)=>{InputHandler(e)}}/>
         </ResetGuide>}
-        {stepNumber===1 && <ResetGuide imglogo ={mail} title="Password Reset" subtitle="Put the code we sent to your email" label="Continue">
+        {stepNumber === 1 && <ResetGuide data={resetData} step={stepNumber} setStep = {setStepNumber} imglogo ={mail} title="Password Reset" subtitle="Put the code we sent to your email" label="Continue">
             <OtpInput data={resetData} setData = {SetResetData}/>
         </ResetGuide>}
-        {stepNumber===2 && <ResetGuide imglogo ={lock} title="Set new password" label="Reset Password">
+        {stepNumber === 2 && <ResetGuide data={resetData} step={stepNumber} setStep = {setStepNumber} imglogo ={lock} title="Set new password" label="Reset Password">
             <TextField label="Password" type="password" name="password" value={resetData.password} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"300px",marginBottom:"20px",}}/>
             <TextField label="Confirmed Password" type="password" name="confirmedPass" value={resetData.confirmedPass} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"300px"}}/>
         </ResetGuide>}
