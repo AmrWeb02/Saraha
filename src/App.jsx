@@ -10,8 +10,10 @@ import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
 import EmailConfirm from './Pages/EmailConfirm'
 import ForgotPassword from './Pages/ForgotPassword'
+import Profile from './Pages/Profile'
 // Layout
 import NavigationBar from './Layout/GirdLayout'
+import { ProtectedRoute } from './Components/ProtectedRoute'
 // Send Login AND signUp data
 export const sendData = async (url,jsondata) =>{
   try{
@@ -95,7 +97,11 @@ function App() {
         <Route path='/signup' element={<SignUp/>}/>
       </Route>
       <Route path='/email-confirmation/confirmEmail/*' element={<EmailConfirm/>}/>   
-      <Route path='/forgot-password' element={<ForgotPassword/>}/>   
+      <Route path='/forgot-password' element={<ForgotPassword/>}/>
+      <Route element={<ProtectedRoute/>}>
+      {/* Any route here is protected */}
+        <Route path="/profile" element={<Profile/>}/>
+      </Route>
       </>
 
     ), { basename: '/Saraha' }

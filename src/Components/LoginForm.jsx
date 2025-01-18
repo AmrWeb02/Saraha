@@ -68,6 +68,8 @@ const LoginForm = () => {
       responseErrors= await sendData('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/login',data);
       toastMaker(responseErrors);
       console.log(responseErrors);
+      window.localStorage.setItem("token", responseErrors.data.token);
+      console.log(window.localStorage);
     }
     if(data.email.trim()===""){
       setErrorData((prevErrorData)=> {return {...prevErrorData, email:true}});
