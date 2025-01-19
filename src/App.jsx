@@ -14,6 +14,7 @@ import Profile from './Pages/Profile'
 // Layout
 import NavigationBar from './Layout/GirdLayout'
 import { ProtectedRoute } from './Components/ProtectedRoute'
+import { MainLayout } from './Layout/MainLayout'
 // Send Login AND signUp data
 export const sendData = async (url,jsondata) =>{
   try{
@@ -100,7 +101,9 @@ function App() {
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route element={<ProtectedRoute/>}>
       {/* Any route here is protected */}
-        <Route path="/profile" element={<Profile/>}/>
+        <Route element={<MainLayout/>}>
+          <Route path="/profile" element={<Profile/>}/>
+        </Route>
       </Route>
       </>
 

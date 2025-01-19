@@ -9,6 +9,16 @@ a{
     color:white;
     font-weight: bold;
 }
+a.glassStyle{
+    background-color: #BFD8AF;
+    transition: all 0.5s ease;
+}
+.MuiDrawer-paper a.glassStyle{
+    padding:0;
+}
+a.glassStyle.active{
+    background-color: #396B1C;
+}
 .indicator{
     width: 105px;
     height: 50px;
