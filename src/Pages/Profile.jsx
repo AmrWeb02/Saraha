@@ -5,7 +5,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-
+import SubmitBtn from '../Components/SubmitBtn';
 import { Typography } from '@mui/material';
 // Icons
 import { FaEdit } from "react-icons/fa";
@@ -43,7 +43,7 @@ const Profile = () => {
       { userObject && <Box component="div" sx={{display:"flex", justifyContent:"center",height:"100%",padding:"25px"}}>
         <Box component="div" sx={{backgroundColor:"white", borderRadius:"20px",padding:"20px", width:"95%",}}>
           {/* Data container */}
-          <Box componenet="div">
+          <Box componenet="div" sx={{position:"relative"}}>
             <Box componenet="div" sx={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}>
               <h1>{userObject.userName}</h1>
               <FaUser size={100}/>
@@ -61,8 +61,7 @@ const Profile = () => {
               name="phone" value={payLoad.phone} onChange={handleInput} disabled inputRef={input3}/>
               <FaEdit style={{marginLeft:"15px", cursor:"pointer"}} size={25} onClick={()=>{HandleEdit(input3)}}/>
               </div>
-
-              <div style={{display:"flex", alignItems:"center"}}>
+              <div style={{display:"flex", alignItems:"center",}}>
                 <FormControl fullWidth>
                   <InputLabel>Gender</InputLabel>
                   <Select sx={{ '& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Gender"
@@ -73,10 +72,13 @@ const Profile = () => {
                 </FormControl>
                 <FaEdit style={{marginLeft:"15px", cursor:"pointer"}} size={25} onClick={()=>{HandleEdit(input4)}}/>
               </div>
+              <button>Update</button>
+
             </div>
               {/* <h4>{userObject.updatedAt}</h4>
               <h4>{userObject.createdAt}</h4> */}
             </Box>
+
           </Box>
         </Box>}
     </>

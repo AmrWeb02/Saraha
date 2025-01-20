@@ -1,44 +1,46 @@
-import React from 'react'
-import { Outlet, Navigate } from 'react-router-dom'
-export const ProtectedRoute = () => {
-    const token = window.localStorage.getItem("token");
-    if(token){
-        // Token exist, validate it's expiry
-        let isValid = tokenVerify();
-        if(isValid){
-            return <Outlet/>
-        }
-        else{
-            return <Navigate to='/'/>
-        }
-    }
-    else{
-        // Token doesn't exist, return to homepage
-        return <Navigate to='/'/>
-    }
-    // return token? <Outlet/> : <Navigate to="/"/> 
-}
 
-export const tokenVerify = async () =>{
-  try{
-    const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/user/userProfile',{
-      method: "GET",
-      headers:{
-          "Authorization" : "Barrer " + window.localStorage.getItem("token"),
+import React, { useState, useEffect } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+
+export const ProtectedRoute = () => {
+  const [isValid, setIsValid] = useState(null); // null for initial loading state
+  const token = window.localStorage.getItem("token");
+
+  useEffect(() => {
+    const tokenVerify = async () => {
+      try {
+        const response = await fetch("http://ec2-3-220-251-57.compute-1.amazonaws.com/user/userProfile", {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (response.ok) {
+          console.log("Token is valid");
+          setIsValid(true);
+        } else {
+          console.log("Token expired");
+          setIsValid(false);
+        }
+      } catch (err) {
+        console.error("Error verifying token:", err);
+        setIsValid(false);
       }
-  });
-    if(response.ok){
-      console.log("token is ok");
-      return true
+    };
+
+    if (token) {
+      tokenVerify();
+    } else {
+      setIsValid(false);
     }
-    else{
-      console.log("token expired");
-      return false;
-    }
+  }, [token]); // Runs only once when the component mounts or when `token` changes
+
+  // Handle loading state while the token is being verified
+  if (isValid === null) {
+    return <div>Loading...</div>;
   }
-  catch(err){
-    console.log("test",err);
-  }
-//   console.log("Response status:", response.status);
-// console.log("Response data:", await response.json());
-}
+
+  // Render based on the validity of the token
+  return isValid ? <Outlet /> : <Navigate to="/" />;
+};
