@@ -15,6 +15,30 @@ import Profile from './Pages/Profile'
 import NavigationBar from './Layout/GirdLayout'
 import { ProtectedRoute } from './Components/ProtectedRoute'
 import { MainLayout } from './Layout/MainLayout'
+// Loaders
+export const profileLoader = async () =>{
+  try{
+    const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/user/userProfile',{
+      method: "GET",
+      headers:{
+          "Authorization" : "Barrer " + window.localStorage.getItem("token"),
+      }
+  });
+    if(response.ok){
+      const ResponseData = await response.json();
+      // console.log(ResponseData.data.user);
+      return ResponseData.data.user;
+    }
+    else{
+      return undefined;
+    }
+  }
+  catch(err){
+    console.log("test",err);
+  }
+//   console.log("Response status:", response.status);
+// console.log("Response data:", await response.json());
+}
 // Send Login AND signUp data
 export const sendData = async (url,jsondata) =>{
   try{
@@ -101,8 +125,8 @@ function App() {
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route element={<ProtectedRoute/>}>
       {/* Any route here is protected */}
-        <Route element={<MainLayout/>}>
-          <Route path="/profile" element={<Profile/>}/>
+        <Route element={<MainLayout/>} >
+          <Route path="/profile" loader={profileLoader} element={<Profile/>}/>
         </Route>
       </Route>
       </>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet, NavLink, useLoaderData } from 'react-router-dom'
 import { FiMenu } from "react-icons/fi";
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid2'
@@ -21,6 +21,7 @@ export const MainLayout = () => {
   const handleDrawerToggle = () =>{
     setDrawerOpen( prev => !prev);
   }
+
   return (
     <>
     <Grid container direction="row" >
@@ -82,7 +83,7 @@ export const MainLayout = () => {
 
           </Drawer>
         </Grid>
-        <Grid size={{xs:13, md:10}} sx={{backgroundColor:"primary.light"}}>
+        <Grid size={{xs:13, md:10}} sx={{backgroundColor:"primary.light", height:{xs:"calc(100vh - 73px)", md:"calc(100vh - 98px)"}}}>
             <Outlet/>    
         </Grid>
     </Grid>
