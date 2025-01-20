@@ -5,8 +5,12 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import SubmitBtn from '../Components/SubmitBtn';
+import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Chip from '@mui/material/Chip';
+import { ToastContainer, toast } from 'react-toastify';
 // Icons
 import { FaEdit } from "react-icons/fa";
 
@@ -14,6 +18,31 @@ import { FaUser } from "react-icons/fa";
 import { SlUserFemale } from "react-icons/sl";
 // Loader
 import { useLoaderData } from 'react-router-dom';
+// Styles
+import { BtnStyles } from '../Components/SubmitBtn';
+export const updateFields = async (url,payLoad) =>{
+  try{
+    const response = await fetch(url, {
+      method:"PATCH",
+      headers:{
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(payLoad),
+    })
+    if(response.ok){
+      console.log("Update success");
+      toast.success("Update Success");
+    }
+    else{
+      console.log("Update failed");
+      toast.error("Update Failed");
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
+}
 const Profile = () => {
   const userData = useLoaderData();
   const [userObject, setUserObject] = useState(userData);
@@ -22,7 +51,6 @@ const Profile = () => {
   const input1 = useRef(null);
   const input2 = useRef(null);
   const input3 = useRef(null);
-  const input4 = useRef(null);
   console.log(input1);
   console.log(userData);
   const HandleEdit = (inp) =>{
@@ -46,40 +74,59 @@ const Profile = () => {
           <Box componenet="div" sx={{position:"relative"}}>
             <Box componenet="div" sx={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}>
               <h1>{userObject.userName}</h1>
-              <FaUser size={100}/>
-              {/* <SlUserFemale size={100} /> */}
+              { userObject.gender=="male" &&<FaUser size={70}/>}
+              { userObject.gender=="female" &&<SlUserFemale size={70}/>}
             </Box>
             <div style={{display:"flex", flexDirection:"column",width:"fit-content",height:"265px",justifyContent:"space-between"}}>
               <div style={{display:"flex", alignItems:"center"}}>
-              <TextField sx={{'& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Full Name"
-              name="userName" value={payLoad.userName} onChange={(e)=>handleInput(e)} disabled inputRef={input1}/>
-              <FaEdit style={{marginLeft:"15px", cursor:"pointer"}} size={25} onClick={()=>{HandleEdit(input1)}}/>
+                <TextField sx={{'& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Full Name"
+                name="userName" value={payLoad.userName} onChange={(e)=>handleInput(e)} disabled inputRef={input1}/>
+                <Tooltip title="Edit">
+                  <IconButton sx={{marginLeft:"15px", cursor:"pointer"}}  onClick={()=>{HandleEdit(input1)}}>
+                    <FaEdit size={25}/>
+                  </IconButton>
+                </Tooltip>
               </div>
 
               <div style={{display:"flex", alignItems:"center"}}>
-              <TextField sx={{ '& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Phone"
-              name="phone" value={payLoad.phone} onChange={handleInput} disabled inputRef={input3}/>
-              <FaEdit style={{marginLeft:"15px", cursor:"pointer"}} size={25} onClick={()=>{HandleEdit(input3)}}/>
+                <TextField sx={{ '& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Phone"
+                name="phone" value={payLoad.phone} onChange={handleInput} disabled inputRef={input2}/>
+                <Tooltip title="Edit">
+                  <IconButton sx={{marginLeft:"15px", cursor:"pointer"}} onClick={()=>{HandleEdit(input2)}}>
+                   <FaEdit size={25} />
+                  </IconButton>
+               </Tooltip>
               </div>
+
               <div style={{display:"flex", alignItems:"center",}}>
                 <FormControl fullWidth>
                   <InputLabel>Gender</InputLabel>
                   <Select sx={{ '& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Gender"
-                  name="gender" value={payLoad.gender} disabled={isDisabled} inputRef={input4} onChange={handleInput}>
-                  <MenuItem value="male">Male</MenuItem>
-                  <MenuItem value="female">Female</MenuItem>
+                    name="gender" value={payLoad.gender} disabled={isDisabled} inputRef={input3} onChange={handleInput}>
+                    <MenuItem value="male">Male</MenuItem>
+                    <MenuItem value="female">Female</MenuItem>
                   </Select>
                 </FormControl>
-                <FaEdit style={{marginLeft:"15px", cursor:"pointer"}} size={25} onClick={()=>{HandleEdit(input4)}}/>
+                <Tooltip title="Edit">
+                  <IconButton sx={{marginLeft:"15px", cursor:"pointer"}} onClick={()=>{HandleEdit(input3)}}>
+                    <FaEdit size={25} />
+                  </IconButton>
+                </Tooltip>
               </div>
-              <button>Update</button>
-
             </div>
-              {/* <h4>{userObject.updatedAt}</h4>
-              <h4>{userObject.createdAt}</h4> */}
-            </Box>
+            <br/>
+            <Divider component="div"/>
+            <br />
+            <div style={{display:"flex", flexDirection:"column", alignItems:"flex-start"}}>
+              <Chip label={`Created At ${userObject.createdAt}`} sx={{marginBottom:"20px"}}/>
+              <Chip label={`Updated At ${userObject.updatedAt}`}/>
+            </div>
 
+            <Box component="input" type="submit" value="Update" sx={{...BtnStyles,margin:"20px auto", display:'flex', width:'200px'}}
+            onClick={()=>{updateFields("http://ec2-3-220-251-57.compute-1.amazonaws.com/user/update-profile",payLoad)}}/>
+            </Box>
           </Box>
+          <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/>
         </Box>}
     </>
   )

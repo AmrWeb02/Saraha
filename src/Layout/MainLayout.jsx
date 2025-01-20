@@ -36,6 +36,7 @@ export const MainLayout = () => {
             <Box sx={{ width:"500px", height:"100%", display: { xs: "none", md: "block" } }}>
               <Box component="nav" sx={{height:"100%", display:"flex", justifyContent:"space-evenly", alignItems:"center"}}>
               <NavLink to='/profile' className="glassStyle">Profile</NavLink>
+              <NavLink to='/profile-password' className="glassStyle">Security</NavLink>
               <NavLink to='/home' className="glassStyle">Home</NavLink>
               <NavLink to='/' onClick={()=>{window.localStorage.removeItem("token")}} className="glassStyle">Sign out</NavLink>
             </Box>
@@ -52,12 +53,7 @@ export const MainLayout = () => {
           </Toolbar>
         </AppBar>
         </Grid>
-        <Grid size={{xs:2}} sx={{height:{xs:"calc(100vh - 73px)", md:"calc(100vh - 98px)"}, background:"linear-gradient(to bottom, #A6C88B, #516244)", display:{xs:"none",md:"block"}, }}>
-        <Box component="div" sx={{display:"flex",flexDirection:"Column", height:"100%", padding:"20px"}}>
-          <NavLink to='/profile' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Profile</NavLink>
-          <NavLink to='/home' className="glassStyle" style={{borderRadius:"0",width:"100%"}}>Security</NavLink>
-          <NavLink to='/' onClick={()=>{window.localStorage.removeItem("token")}} className="glassStyle" style={{borderRadius:"0",width:"100%", marginTop:"auto"}}>Sign out</NavLink>
-        </Box>
+
           <Drawer
             anchor="left"
             open={drawerOpen}
@@ -77,13 +73,13 @@ export const MainLayout = () => {
           >
             <nav style={{display:"flex", flexDirection:"column",marginTop:"25px"}}>
             <NavLink to='/profile' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Profile</NavLink>
+            <NavLink to='/profile-password' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Security</NavLink>
             <NavLink to='/home' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Home</NavLink>
             <NavLink to='/login' onClick={()=>{window.localStorage.removeItem("token")}} className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Sign out</NavLink>
             </nav>
 
           </Drawer>
-        </Grid>
-        <Grid size={{xs:13, md:10}} sx={{backgroundColor:"primary.light", height:{xs:"calc(100vh - 73px)", md:"calc(100vh - 98px)"}}}>
+        <Grid size={{xs:12, md:12}} sx={{backgroundColor:"primary.light", height:{xs:"calc(100vh - 73px)", md:"calc(100vh - 98px)"}}}>
             <Outlet/>    
         </Grid>
     </Grid>

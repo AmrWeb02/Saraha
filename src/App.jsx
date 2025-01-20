@@ -15,6 +15,7 @@ import Profile from './Pages/Profile'
 import NavigationBar from './Layout/GirdLayout'
 import { ProtectedRoute } from './Components/ProtectedRoute'
 import { MainLayout } from './Layout/MainLayout'
+import PasswordChange from './Pages/PasswordChange'
 // Loaders
 export const profileLoader = async () =>{
   try{
@@ -127,6 +128,7 @@ function App() {
       {/* Any route here is protected */}
         <Route element={<MainLayout/>} >
           <Route path="/profile" loader={profileLoader} element={<Profile/>}/>
+          <Route path="/profile-password" element={<PasswordChange/>}/>
         </Route>
       </Route>
       </>
