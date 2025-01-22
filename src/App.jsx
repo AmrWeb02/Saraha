@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import './App.css'
 
-import {NavLink, Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom'
+import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements, } from 'react-router-dom'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@mui/material'
 // Pages
@@ -11,6 +11,8 @@ import SignUp from './Pages/SignUp'
 import EmailConfirm from './Pages/EmailConfirm'
 import ForgotPassword from './Pages/ForgotPassword'
 import Profile from './Pages/Profile'
+import Home from './Pages/Home'
+import TargetUser from './Pages/TargetUser'
 // Layout
 import NavigationBar from './Layout/GirdLayout'
 import { ProtectedRoute } from './Components/ProtectedRoute'
@@ -28,7 +30,7 @@ export const profileLoader = async () =>{
     if(response.ok){
       const ResponseData = await response.json();
       // console.log(ResponseData.data.user);
-      return ResponseData.data.user;
+      return ResponseData.data;
     }
     else{
       return undefined;
@@ -37,8 +39,6 @@ export const profileLoader = async () =>{
   catch(err){
     console.log("test",err);
   }
-//   console.log("Response status:", response.status);
-// console.log("Response data:", await response.json());
 }
 // Send Login AND signUp data
 export const sendData = async (url,jsondata) =>{
@@ -129,8 +129,10 @@ function App() {
         <Route element={<MainLayout/>} >
           <Route path="/profile" loader={profileLoader} element={<Profile/>}/>
           <Route path="/profile-password" element={<PasswordChange/>}/>
+          <Route path="/Home" loader={profileLoader} element={<Home/>}/>
         </Route>
       </Route>
+      <Route path="/:userName/:id" element={<TargetUser/>}/>
       </>
 
     ), { basename: '/Saraha' }

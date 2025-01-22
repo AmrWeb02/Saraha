@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 // Components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -29,6 +30,7 @@ export const styleObj = {
                     },
 }
 const LoginForm = () => {
+  let navigate = useNavigate();
   const [data, setData] = useState({email:"",password:""});
   const [ErrorData, setErrorData] = useState({email:false, password:false,});
   const [ErrorNames, setErrorNames] = useState({username:"", email:"", phone:"", password:"", confirmationPassword:""});
@@ -70,6 +72,7 @@ const LoginForm = () => {
       console.log(responseErrors);
       window.localStorage.setItem("token", responseErrors.data.token);
       console.log(window.localStorage);
+      navigate("/home");
     }
     if(data.email.trim()===""){
       setErrorData((prevErrorData)=> {return {...prevErrorData, email:true}});

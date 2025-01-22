@@ -13,6 +13,7 @@ import Chip from '@mui/material/Chip';
 import { ToastContainer, toast } from 'react-toastify';
 // Icons
 import { FaEdit } from "react-icons/fa";
+import { FaLink } from "react-icons/fa";
 
 import { FaUser } from "react-icons/fa";
 import { SlUserFemale } from "react-icons/sl";
@@ -45,14 +46,23 @@ export const updateFields = async (url,payLoad) =>{
 }
 const Profile = () => {
   const userData = useLoaderData();
-  const [userObject, setUserObject] = useState(userData);
+  const [userObject, setUserObject] = useState(userData.user);
   const [payLoad, setPayLoad] = useState({userName:userObject.userName,phone:userObject.phone,gender:userObject.gender})
   const [isDisabled, setIsDisabled] = useState(true);
   const input1 = useRef(null);
   const input2 = useRef(null);
   const input3 = useRef(null);
-  console.log(input1);
   console.log(userData);
+  console.log(userData.messages.length);
+  const handleCopy = async () =>{
+    try{
+      const promise = await navigator.clipboard.writeText(`http://localhost:5173/Saraha/${userData.userName}/${userData._id}`);
+      toast.info("Link copied to clipboard");
+    }
+    catch(err){
+      toast.error("Failed to copy link");
+    }
+  }
   const HandleEdit = (inp) =>{
     console.log(inp.current);
       inp.current.disabled = !inp.current.disabled;
@@ -77,6 +87,12 @@ const Profile = () => {
               { userObject.gender=="male" &&<FaUser size={70}/>}
               { userObject.gender=="female" &&<SlUserFemale size={70}/>}
             </Box>
+            <Tooltip title="copy" placement='right'>
+              <IconButton sx={{borderRadius:0, padding:"20px 0", fontSize:{xs:"0.95rem",sm:"1.1rem"}}} onClick={handleCopy}>
+                <p>{`http://localhost:5173/Saraha/${userData.userName}/${userData._id}`}</p>
+                <FaLink style={{marginLeft:"5px"}}/>
+              </IconButton>
+            </Tooltip>
             <div style={{display:"flex", flexDirection:"column",width:"fit-content",height:"265px",justifyContent:"space-between"}}>
               <div style={{display:"flex", alignItems:"center"}}>
                 <TextField sx={{'& .MuiInput-root': {backgroundColor: 'primary.extra',padding:"10px"}}} variant="standard" label="Full Name"
