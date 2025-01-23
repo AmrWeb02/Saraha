@@ -1,45 +1,69 @@
 import React,{useState} from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
-
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Drawer from '@mui/material/Drawer';
+// Componenets
+import MsgCard from '../Components/MsgCard';
 // Icon
-import { FaLink } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
-import { SlUserFemale } from "react-icons/sl";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
 const Home = () => {
-    const userData = useLoaderData();
-    const messages = userData.messages;
-    console.log(messages);
-    // const id = userData._id;
-    // console.log(id);
-    // const getUserName = async () =>{
-    //     try{
-    //         const response = await fetch(`http://ec2-3-220-251-57.compute-1.amazonaws.com/user/${id}/profile`,{
-    //             method: "GET"
-    //         })
-    //         if(response.ok){
-    //             const dat = await response.json();
-    //             window.localStorage.setItem("userName",dat.data.user.userName);
-    //             // console.log(dat.data.user);
-    //         }
-    //     }
-    //     catch(err){
-    //         console.log(err)
-    //     }
-    // }
-    // getUserName();
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const [drawOpen, setdrawOpen] = useState(false);
+  const [selectedMsg, setSelectedMsg] = useState();
+  const userData = useLoaderData();
+  const [messages, setMessages] = useState(userData.messages);
+  // const messages = userData.messages;
+  console.log(messages);
+  const handleClose = () =>{
+    setdrawOpen(false);
+  }
+  const handleCardClick = (msg) =>{
+    setdrawOpen(true);
+    setSelectedMsg(msg);
+  }
+  const deleteMsg = async (e,id) =>{
+    e.stopPropagation();
+    try{
+      const response = await fetch(`http://ec2-3-220-251-57.compute-1.amazonaws.com/message/delete/${id}`,{
+        method: "DELETE",
+      })
+      if(response.ok){
+        toast.success("Message deleted successfully");
+        // setMessages((prevMessages) => prevMessages.filter((msg) => msg._id !== id));
+        setMessages( (prevMessages) => {return prevMessages.filter((msg)=>{return msg._id !==id}) });
+      }
+      else{
+        toast.error("Couldn't delete message");
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
   return (
     <>
-    <Box component="div" sx={{display:"flex", justifyContent:"center",height:"100%",}}>
-        <Box component="div" sx={{backgroundColor:"white",padding:"20px", width:"20%",}}>
-
+        <Box component="div" sx={{backgroundColor:"primary.light",height:"100%",width:"100%",}}>
+          <Box component="div" sx={{height:"100%",overflowY:"scroll",backgroundColor:"primary.main", width:{xs:"100%", sm:"40%", lg:"20%"}}}>
+            {messages.slice().reverse().map((message,index)=>{return <MsgCard key={message._id} clickFunc={()=>{handleCardClick(message)}} deleteFunc={(e)=>{deleteMsg(e,message._id)}} msg={message.message} time={message.createdAt}/>})}
+          </Box>
+            <Drawer open={drawOpen} onClose={handleClose} anchor='right' PaperProps={{
+              sx:{
+                width:{xs:"100%",sm:"60%",lg:"80%"},
+                backgroundColor:"primary.light",
+              }
+            }}>
+              {!isMobile && <FaArrowLeftLong onClick={handleClose} size={40} style={{cursor:"pointer",margin:"25px 25px"}} />}
+              {isMobile && <IoMdClose onClick={handleClose} size={40} style={{cursor:"pointer",margin:"25px"}}/>}
+              <Box component="div" sx={{padding:"25px"}}>
+                {selectedMsg && <Typography variant='h3' >{selectedMsg.message}</Typography>}
+              </Box>
+            </Drawer>
         </Box>
-        <Box component="div" sx={{backgroundColor:"gray",padding:"20px", width:"80%",}}>
-
-</Box>
-      </Box>
-    <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/>
+        <ToastContainer position="bottom-right" theme="light" style={ isMobile ? {width:"70%", left:"50%", transform:"translateX(-50%)"}:{width:"70%"}}/>
     </>
   )
 }

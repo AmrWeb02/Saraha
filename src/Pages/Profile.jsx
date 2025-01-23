@@ -46,6 +46,7 @@ export const updateFields = async (url,payLoad) =>{
 }
 const Profile = () => {
   const userData = useLoaderData();
+  console.log(userData.user);
   const [userObject, setUserObject] = useState(userData.user);
   const [payLoad, setPayLoad] = useState({userName:userObject.userName,phone:userObject.phone,gender:userObject.gender})
   const [isDisabled, setIsDisabled] = useState(true);
@@ -56,7 +57,7 @@ const Profile = () => {
   console.log(userData.messages.length);
   const handleCopy = async () =>{
     try{
-      const promise = await navigator.clipboard.writeText(`http://localhost:5173/Saraha/${userData.userName}/${userData._id}`);
+      const promise = await navigator.clipboard.writeText(`http://localhost:5173/Saraha/${userData.user.userName}/${userData.user._id}`);
       toast.info("Link copied to clipboard");
     }
     catch(err){
@@ -89,7 +90,7 @@ const Profile = () => {
             </Box>
             <Tooltip title="copy" placement='right'>
               <IconButton sx={{borderRadius:0, padding:"20px 0", fontSize:{xs:"0.95rem",sm:"1.1rem"}}} onClick={handleCopy}>
-                <p>{`http://localhost:5173/Saraha/${userData.userName}/${userData._id}`}</p>
+                <p>{`http://localhost:5173/Saraha/${userObject.userName}/${userObject._id}`}</p>
                 <FaLink style={{marginLeft:"5px"}}/>
               </IconButton>
             </Tooltip>
