@@ -50,10 +50,11 @@ const Home = () => {
           <Box component="div" sx={{height:"100%",overflowY:"scroll",backgroundColor:"primary.main", width:{xs:"100%", sm:"40%", lg:"20%"}}}>
             {messages.slice().reverse().map((message,index)=>{return <MsgCard key={message._id} clickFunc={()=>{handleCardClick(message)}} deleteFunc={(e)=>{deleteMsg(e,message._id)}} msg={message.message} time={message.createdAt}/>})}
           </Box>
-            <Drawer open={drawOpen} onClose={handleClose} anchor='right' PaperProps={{
+            <Drawer open={drawOpen} onClose={handleClose} anchor={isMobile? "bottom":"right"} PaperProps={{
               sx:{
                 width:{xs:"100%",sm:"60%",lg:"80%"},
                 backgroundColor:"primary.light",
+                height: isMobile? "90%":"100%",
               }
             }}>
               {!isMobile && <FaArrowLeftLong onClick={handleClose} size={40} style={{cursor:"pointer",margin:"25px 25px"}} />}

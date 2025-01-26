@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Outlet, NavLink, useLoaderData } from 'react-router-dom'
+import { Outlet, NavLink } from 'react-router-dom'
 import { FiMenu } from "react-icons/fi";
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid2'
