@@ -32,11 +32,11 @@ export const updateFields = async (url,payLoad) =>{
       body: JSON.stringify(payLoad),
     })
     if(response.ok){
-      console.log("Update success");
+      // console.log("Update success");
       toast.success("Update Success");
     }
     else{
-      console.log("Update failed");
+      // console.log("Update failed");
       toast.error("Update Failed");
     }
   }
@@ -46,15 +46,15 @@ export const updateFields = async (url,payLoad) =>{
 }
 const Profile = () => {
   const userData = useLoaderData();
-  console.log(userData.user);
+  // console.log(userData.user);
   const [userObject, setUserObject] = useState(userData.user);
   const [payLoad, setPayLoad] = useState({userName:userObject.userName,phone:userObject.phone,gender:userObject.gender})
   const [isDisabled, setIsDisabled] = useState(true);
   const input1 = useRef(null);
   const input2 = useRef(null);
   const input3 = useRef(null);
-  console.log(userData);
-  console.log(userData.messages.length);
+  // console.log(userData);
+  // console.log(userData.messages.length);
   const handleCopy = async () =>{
     try{
       const promise = await navigator.clipboard.writeText(`https://saraha-lyart.vercel.app/${userData.user.userName}/${userData.user._id}`);
@@ -65,7 +65,7 @@ const Profile = () => {
     }
   }
   const HandleEdit = (inp) =>{
-    console.log(inp.current);
+    // console.log(inp.current);
       inp.current.disabled = !inp.current.disabled;
       inp.current.focus();
       if(inp.current.node){
@@ -74,7 +74,7 @@ const Profile = () => {
   }
   const handleInput = (event) =>{
     setPayLoad( prevObj => {return {...prevObj, [event.target.name]:event.target.value}})
-    console.log(event.target);
+    // console.log(event.target);
   }
   return (
     <>

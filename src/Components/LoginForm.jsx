@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 // Components
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -44,16 +44,16 @@ const LoginForm = () => {
     // }
   }
   const toastMaker = (responseErrors) =>{
-    console.log("tempArr,", responseErrors);
+    // console.log("tempArr,", responseErrors);
       try{
         if('successMessage' in responseErrors){
           toast.success(responseErrors.successMessage);
         }
         else{
           for(let err of responseErrors ){
-            console.log(err);
+            // console.log(err);
             toast.error(err.message);
-            console.log(err.message);
+            // console.log(err.message);
           }
         }
 
@@ -66,24 +66,24 @@ const LoginForm = () => {
   const formValidator = async (e) =>{
     e.preventDefault();
     if( (data.email !=="") && (data.password !=="") ){
-      console.log("Login data is sent to server");
+      // console.log("Login data is sent to server");
       responseErrors= await sendData('https://saraha-app-eight.vercel.app/auth/login',data);
       toastMaker(responseErrors);
-      console.log(responseErrors);
+      // console.log(responseErrors);
       window.localStorage.setItem("token", responseErrors.data.token);
-      console.log(window.localStorage);
+      // console.log(window.localStorage);
       navigate("/home");
     }
     if(data.email.trim()===""){
       setErrorData((prevErrorData)=> {return {...prevErrorData, email:true}});
       setErrorNames((prevErrorNames) => {return {...prevErrorNames, email:"Empty Field"}})
-      console.log('email problem');
-      console.log(ErrorData);
+      // console.log('email problem');
+      // console.log(ErrorData);
     }
     if(data.password.trim()===""){
       setErrorData((prevErrorData)=> {return {...prevErrorData, password:true}});
       setErrorNames((prevErrorNames) => {return {...prevErrorNames, password:"Empty Field"}})
-      console.log("password problem");
+      // console.log("password problem");
     }
   }
   const errorReset = (e) =>{
@@ -115,6 +115,7 @@ const LoginForm = () => {
                    error={ErrorData.password}
                    helperText={ErrorNames.password}
         />
+        <NavLink to="/forgot-password" style={{color:"black", width:"auto"}}>Forget password</NavLink>
         <SubmitBtn label="Login" formValidator={formValidator}/>
         <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/>
       </Box>
