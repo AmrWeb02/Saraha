@@ -1,8 +1,8 @@
-import { useState } from 'react'
-
+// CSS imports
 import './App.css'
-
+// React-router-dom imports
 import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements, } from 'react-router-dom'
+// Material UI imports
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@mui/material'
 // Pages
@@ -13,6 +13,7 @@ import ForgotPassword from './Pages/ForgotPassword'
 import Profile from './Pages/Profile'
 import Home from './Pages/Home'
 import TargetUser from './Pages/TargetUser'
+import NotFound from './Pages/NotFound'
 // Layout
 import NavigationBar from './Layout/GirdLayout'
 import { ProtectedRoute } from './Components/ProtectedRoute'
@@ -133,6 +134,8 @@ function App() {
         </Route>
       </Route>
       <Route path="/:userName/:id" element={<TargetUser/>}/>
+      <Route path="*" element={<NotFound/>}/>
+
       </>
 
     ), { basename: '/Saraha' }
