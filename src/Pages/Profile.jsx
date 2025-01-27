@@ -57,7 +57,7 @@ const Profile = () => {
   console.log(userData.messages.length);
   const handleCopy = async () =>{
     try{
-      const promise = await navigator.clipboard.writeText(`https://amrweb02.github.io/Saraha/${userData.user.userName}/${userData.user._id}`);
+      const promise = await navigator.clipboard.writeText(`https://saraha-lyart.vercel.app/${userData.user.userName}/${userData.user._id}`);
       toast.info("Link copied to clipboard");
     }
     catch(err){
