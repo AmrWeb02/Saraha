@@ -3,8 +3,8 @@ Saraha. In Arabic, it means speaking truthfully
 # What is this project about?
 It allows you to send messages anonymously to users using their shared link or unique identifier.
 # What tech stack is used?
-Front-End libraries/frameworks: **React JS**, react-router, **material UI (MUI)**, react-icons, react-spinners, and react-toastify
-Back-End frameworks: **Node JS, Express JS**
+- Front-End libraries/frameworks: **React JS**, react-router, **material UI (MUI)**, react-icons, react-spinners, and react-toastify
+- Back-End frameworks: **Node JS, Express JS**
 # What features does this project include?
 1. Fully functional authentication system
    - Login, signup & email verification using JWT
