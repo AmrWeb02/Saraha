@@ -57,7 +57,7 @@ const Profile = () => {
   console.log(userData.messages.length);
   const handleCopy = async () =>{
     try{
-      const promise = await navigator.clipboard.writeText(`https://saraha-app-eight.vercel.app/Saraha/${userData.user.userName}/${userData.user._id}`);
+      const promise = await navigator.clipboard.writeText(`https://amrweb02.github.io/Saraha/${userData.user.userName}/${userData.user._id}`);
       toast.info("Link copied to clipboard");
     }
     catch(err){
@@ -90,7 +90,7 @@ const Profile = () => {
             </Box>
             <Tooltip title="copy" placement='right'>
               <IconButton sx={{borderRadius:0, padding:"20px 0", fontSize:{xs:"0.95rem",sm:"1.1rem"}}} onClick={handleCopy}>
-                <p>{`Profile Link`}</p>
+                <p style={{color:"darkgreen"}}>{`Profile Link`}</p>
                 <FaLink style={{marginLeft:"5px"}}/>
               </IconButton>
             </Tooltip>
