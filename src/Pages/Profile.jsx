@@ -90,7 +90,7 @@ const Profile = () => {
             </Box>
             <Tooltip title="copy" placement='right'>
               <IconButton sx={{borderRadius:0, padding:"20px 0", fontSize:{xs:"0.95rem",sm:"1.1rem"}}} onClick={handleCopy}>
-                <p>{`https://saraha-app-eight.vercel.app/Saraha/${userObject.userName}/${userObject._id}`}</p>
+                <p>{`Profile Link`}</p>
                 <FaLink style={{marginLeft:"5px"}}/>
               </IconButton>
             </Tooltip>

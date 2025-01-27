@@ -63,7 +63,7 @@ const TargetUser = () => {
      <Typography variant="h5" sx={{position:"absolute",left:"50%", transform:"translateX(-50%)", top:"56%"}}>{status}</Typography>
         {/* Input elements inside the phone frame */}
             {<FaUser style={{position:"absolute",left:"41%",top:"20%"}} size={70}/>}
-            <h1 style={{position:"absolute",left:"34%",top:"15%"}}>{userName}</h1>
+            <h1 style={{position:"absolute",left:"50%", transform:"translateX(-50%)" ,top:"15%"}}>{userName}</h1>
             <TextField label="Your Message" multiline value={message} rows={4}
                     onChange={handleMessage}
                     sx={{position:"absolute", top:"35%", left:{xs:"25%",sm:"15%"},width:{xs:"50%",sm:"70%"},}}/>
