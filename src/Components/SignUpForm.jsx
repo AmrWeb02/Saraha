@@ -23,7 +23,7 @@ const SignUpForm = () => {
       console.log(typeof responseErrors);
       try{
         if('successMessage' in responseErrors){
-          toast.success(responseErrors.successMessage);
+          toast.success("Check your email to confirm your account.");
         }
         else{
           for(let err of responseErrors ){
