@@ -21,7 +21,7 @@ const TargetUser = () => {
         setStatus("");
         setIsLoading(true);
         try{
-            const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/message',{
+            const response = await fetch('https://saraha-app-eight.vercel.app/message',{
                 method: "POST",
                 headers:{
                     "Content-type": "application/json",

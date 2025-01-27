@@ -10,7 +10,7 @@ const EmailConfirm = () => {
   const token = location.pathname.substring(indexStart+1);
   console.log(location.pathname);
   const SendConfirmationToken = async (token) =>{
-    const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/confirm-email',{
+    const response = await fetch('https://saraha-app-eight.vercel.app/auth/confirm-email',{
       method: 'PATCH',
       headers: {
         "Content-type": "application/json",

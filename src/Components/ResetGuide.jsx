@@ -49,7 +49,7 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
     // Step No. 1
     const sendEmail = async (data, setStep,setData) =>{
       try{
-          const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/forget-password1',{
+          const response = await fetch('https://saraha-app-eight.vercel.app/auth/forget-password1',{
               method: "PATCH",
               body: JSON.stringify({email:data}),
               headers : {
@@ -78,7 +78,7 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
       console.log("Request payload:", { OTP: data });
       console.log("Request headers:", { authorization: token.toString() });
       try{
-        const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/forget-password2',{
+        const response = await fetch('https://saraha-app-eight.vercel.app/auth/forget-password2',{
           method: "PATCH",
           headers: {
             "Authorization" : token,
@@ -100,7 +100,7 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
     }
     const sendPass = async (data, setStep, token) =>{
       try{
-        const response = await fetch('http://ec2-3-220-251-57.compute-1.amazonaws.com/auth/forget-password3',{
+        const response = await fetch('https://saraha-app-eight.vercel.app/auth/forget-password3',{
           method: "PATCH",
           headers: {
             "Authorization" : token,

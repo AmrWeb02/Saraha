@@ -38,7 +38,7 @@ const PasswordChange = () => {
                            onChange={(e)=>handleInput(e)}
                 />
                 <Box component="input" type="submit" value="Update" sx={{...BtnStyles,margin:"20px auto", display:'flex', width:'200px'}}
-                onClick={()=>{updateFields("http://ec2-3-220-251-57.compute-1.amazonaws.com/user/update-password",payLoad)}}/>
+                onClick={()=>{updateFields("https://saraha-app-eight.vercel.app/user/update-password",payLoad)}}/>
             </Box>
         </Box>
     </Box>

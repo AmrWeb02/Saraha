@@ -57,7 +57,7 @@ const Profile = () => {
   console.log(userData.messages.length);
   const handleCopy = async () =>{
     try{
-      const promise = await navigator.clipboard.writeText(`http://localhost:5173/Saraha/${userData.user.userName}/${userData.user._id}`);
+      const promise = await navigator.clipboard.writeText(`https://saraha-app-eight.vercel.app/Saraha/${userData.user.userName}/${userData.user._id}`);
       toast.info("Link copied to clipboard");
     }
     catch(err){
@@ -90,7 +90,7 @@ const Profile = () => {
             </Box>
             <Tooltip title="copy" placement='right'>
               <IconButton sx={{borderRadius:0, padding:"20px 0", fontSize:{xs:"0.95rem",sm:"1.1rem"}}} onClick={handleCopy}>
-                <p>{`http://localhost:5173/Saraha/${userObject.userName}/${userObject._id}`}</p>
+                <p>{`https://saraha-app-eight.vercel.app/Saraha/${userObject.userName}/${userObject._id}`}</p>
                 <FaLink style={{marginLeft:"5px"}}/>
               </IconButton>
             </Tooltip>
@@ -140,7 +140,7 @@ const Profile = () => {
             </div>
 
             <Box component="input" type="submit" value="Update" sx={{...BtnStyles,margin:"20px auto", display:'flex', width:'200px'}}
-            onClick={()=>{updateFields("http://ec2-3-220-251-57.compute-1.amazonaws.com/user/update-profile",payLoad)}}/>
+            onClick={()=>{updateFields("https://saraha-app-eight.vercel.app/user/update-profile",payLoad)}}/>
             </Box>
           </Box>
           <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/>
