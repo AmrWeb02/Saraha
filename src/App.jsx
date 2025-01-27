@@ -138,7 +138,7 @@ function App() {
 
       </>
 
-    ), { basename: '/Saraha' }
+    )
   )
   return (
     <>
