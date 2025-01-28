@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import { ToastContainer, toast } from 'react-toastify';
-
 // Styles
 import { styleObj } from './LoginForm'
 // Components
