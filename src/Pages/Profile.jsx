@@ -140,7 +140,7 @@ const Profile = () => {
             </div>
 
             <Box component="input" type="submit" value="Update" sx={{...BtnStyles,margin:"20px auto", display:'flex', width:'200px'}}
-            onClick={()=>{updateFields("https://saraha-app-eight.vercel.app/user/update-profile",payLoad)}}/>
+            onClick={()=>{updateFields("https://free.saraha.site/user/update-profile",payLoad)}}/>
             </Box>
           </Box>
           <ToastContainer position="bottom-right" theme="light" style={{width:"70%"}}/>

@@ -22,7 +22,7 @@ import PasswordChange from './Pages/PasswordChange'
 // Loaders
 export const profileLoader = async () =>{
   try{
-    const response = await fetch('https://saraha-app-eight.vercel.app/user/userProfile',{
+    const response = await fetch('https://free.saraha.site/user/userProfile',{
       method: "GET",
       headers:{
           "Authorization" : "Barrer " + window.localStorage.getItem("token"),

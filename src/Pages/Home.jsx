@@ -27,7 +27,7 @@ const Home = () => {
   const deleteMsg = async (e,id) =>{
     e.stopPropagation();
     try{
-      const response = await fetch(`https://saraha-app-eight.vercel.app/message/delete/${id}`,{
+      const response = await fetch(`https://free.saraha.site/message/delete/${id}`,{
         method: "DELETE",
       })
       if(response.ok){

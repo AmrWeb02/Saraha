@@ -43,7 +43,7 @@ const SignUpForm = () => {
       if( (data.email.trim() !=="") && (data.password !=="") && (data.confirmationPassword !=="") && (data.userName !=="") && (data.phone !=="") ){
         if(data.password==data.confirmationPassword){
           console.log("Sign up data is sent to server");
-          responseErrors= await sendData('https://saraha-app-eight.vercel.app/auth/signup',data);
+          responseErrors= await sendData('https://free.saraha.site/auth/signup',data);
           toastMaker(responseErrors);
           console.log(responseErrors);
         }

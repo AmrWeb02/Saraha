@@ -9,7 +9,7 @@ export const ProtectedRoute = () => {
   useEffect(() => {
     const tokenVerify = async () => {
       try {
-        const response = await fetch("https://saraha-app-eight.vercel.app/user/userProfile", {
+        const response = await fetch("https://free.saraha.site/user/userProfile", {
           method: "GET",
           headers: {
             Authorization: "Bearer " + token,

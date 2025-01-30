@@ -21,7 +21,7 @@ const TargetUser = () => {
         setStatus("");
         setIsLoading(true);
         try{
-            const response = await fetch('https://saraha-app-eight.vercel.app/message',{
+            const response = await fetch('https://free.saraha.site/message',{
                 method: "POST",
                 headers:{
                     "Content-type": "application/json",

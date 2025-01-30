@@ -67,7 +67,7 @@ const LoginForm = () => {
     e.preventDefault();
     if( (data.email !=="") && (data.password !=="") ){
       // console.log("Login data is sent to server");
-      responseErrors= await sendData('https://saraha-app-eight.vercel.app/auth/login',data);
+      responseErrors= await sendData('https://free.saraha.site/auth/login',data);
       toastMaker(responseErrors);
       // console.log(responseErrors);
       window.localStorage.setItem("token", responseErrors.data.token);
