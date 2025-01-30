@@ -13,7 +13,7 @@ const MsgCard = ({clickFunc,deleteFunc, msg, time}) => {
     const date = new Date(time);
   return (
     <>
-    <Card sx={{ maxWidth: 345, margin:"20px 20px", cursor:"pointer",position:"relative"}} onClick={clickFunc}>
+    <Card sx={{ width:"200px", height:"200px", margin:"20px 20px", cursor:"pointer",position:"relative"}} onClick={clickFunc}>
         <CardHeader sx={{padding:"16px 16px 0px 16px"}} subheader={date.toDateString()}/>
         <CardHeader sx={{padding:"0px 16px 10px 16px"}} subheader={date.toLocaleTimeString()}/>
         <FaUser size={50} style={{paddingLeft:"16px"}}/>
