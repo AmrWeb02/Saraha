@@ -18,7 +18,7 @@ const MsgCard = ({clickFunc,deleteFunc, msg, time}) => {
         <CardHeader sx={{padding:"0px 16px 10px 16px"}} subheader={date.toLocaleTimeString()}/>
         <FaUser size={50} style={{paddingLeft:"16px"}}/>
         <CardContent>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>{msg}</Typography>      
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>{msg.length>12? msg.slice(0,10) +"...": msg}</Typography>      
         </CardContent>
         <Tooltip title="delete" sx={{position:"absolute",right:"16px", bottom:"8px"}} onClick={deleteFunc}>
             <IconButton>
