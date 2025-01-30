@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 // Components
 import { Box, Card, TextField } from '@mui/material'
 import ResetGuide from '../Components/ResetGuide.jsx'
@@ -7,6 +7,7 @@ import OtpInput from '../Components/OtpInput.jsx'
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import SubmitBtn from '../Components/SubmitBtn.jsx'
 // Images
 import forgot from '../assets/forgot.png'
 import lock from '../assets/lock.png'
@@ -14,6 +15,7 @@ import mail from '../assets/mail.png'
 // Styles
 import { styleObj } from '../Components/LoginForm.jsx'
 const ForgotPassword = () => {
+    let navigate = useNavigate();
     const [stepNumber, setStepNumber] = useState(0);
     const [resetData, SetResetData] = useState({
         email:"",
@@ -50,8 +52,8 @@ const ForgotPassword = () => {
             <TextField label="Password" type="password" name="password" value={resetData.password} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"250px",marginBottom:"20px",}}/>
             <TextField label="Confirmed Password" type="password" name="confirmedPass" value={resetData.confirmedPass} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"250px"}}/>
         </ResetGuide>}
-        {stepNumber===3 &&  <><h3 style={{textAlign:"center"}}>Your password has been successfully reset. You can now log in with your new password.</h3>
-        <NavLink to="/" className="bigWidth">Login</NavLink></>}
+        {stepNumber===3 &&  <><h3 style={{margin:"20px 0",textAlign:"center"}}>Your password has been successfully reset. You can now log in with your new password.</h3>
+        <SubmitBtn label="login" formValidator={ ()=>{navigate('/login')}}/></>}
 
        <Box component="div" sx={{backgroundColor:"primary.accent"}} style={{width:"100%", height:"50px", position:"absolute",bottom:"0px",}}></Box>
      </Card>
