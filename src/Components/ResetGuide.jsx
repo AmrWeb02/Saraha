@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import { Box, Card, CardMedia, CardContent, CardActions, Typography } from '@mui/material'
-import { data, NavLink } from 'react-router-dom'
+import { CardMedia, CardContent, CardActions, Typography } from '@mui/material'
+import { NavLink } from 'react-router-dom'
 import SubmitBtn from './SubmitBtn'
 import { FaChevronLeft } from "react-icons/fa6";
 
@@ -32,7 +32,7 @@ const ResetGuide = ({data, setData, step, setStep, imglogo, title, subtitle, lab
   }
   return (
     <>
-    <CardMedia sx={{ width: {xs:"140px", md:"160px"}, height: {xs:"140px", md:"160px"} }} image={imglogo} title="Check mark"/>
+    <CardMedia sx={{margin:"20px 0", width: {xs:"120px", md:"160px"}, height: {xs:"120px", md:"160px"} }} image={imglogo} title="Check mark"/>
     <CardContent>
      <Typography component="h5" variant="h5" align="center" sx={{fontWeight:"bolder",}}>{title}</Typography>
      <Typography component="p" align="center">{subtitle}</Typography>
