@@ -46,8 +46,8 @@ const Home = () => {
 
   return (
     <>
-        <Box component="div" sx={{backgroundColor:"primary.light",height:"100%",width:"100%",}}>
-          <Box component="div" sx={{height:"100%",overflowY:"scroll",backgroundColor:"primary.main", width:{xs:"100%", sm:"40%", lg:"20%"}}}>
+        <Box component="div" sx={{display:"flex", justifyContent:"center",backgroundColor:"primary.light",height:"100%",width:"100%",}}>
+          <Box component="div" sx={{margin:"auto 0",height:"100%",overflowY:"scroll",backgroundColor:"primary.main", width:{xs:"90%",}}}>
             {messages.slice().reverse().map((message,index)=>{return <MsgCard key={message._id} clickFunc={()=>{handleCardClick(message)}} deleteFunc={(e)=>{deleteMsg(e,message._id)}} msg={message.message} time={message.createdAt}/>})}
           </Box>
             <Drawer open={drawOpen} onClose={handleClose} anchor={isMobile? "bottom":"right"} PaperProps={{
