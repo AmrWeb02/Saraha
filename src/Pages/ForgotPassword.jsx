@@ -47,9 +47,11 @@ const ForgotPassword = () => {
         </ResetGuide>}
         {stepNumber === 2 && <ResetGuide data={resetData} step={stepNumber} setStep = {setStepNumber} imglogo ={lock} title="Set new password" label="Reset Password">
             <TextField label="Password" type="password" name="password" value={resetData.password} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"250px",marginBottom:"20px",}}/>
-            <TextField label="Confirmed Password" type="password" name="confirmedPass" value={resetData.confirmedPass} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"300px"}}/>
+            <TextField label="Confirmed Password" type="password" name="confirmedPass" value={resetData.confirmedPass} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"250px"}}/>
         </ResetGuide>}
-        <h1>Your password has been successfully reset. You can now log in with your new password.</h1>
+        {stepNumber===3 &&  <><h1>Your password has been successfully reset. You can now log in with your new password.</h1>
+        <NavLink to="/" className="bigWidth">Login</NavLink></>}
+
        <Box component="div" sx={{backgroundColor:"primary.accent"}} style={{width:"100%", height:"50px", position:"absolute",bottom:"0px",}}></Box>
      </Card>
     </Box>  
