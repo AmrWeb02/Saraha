@@ -16,7 +16,7 @@ const Home = () => {
   const userData = useLoaderData();
   const [messages, setMessages] = useState(userData.messages);
   // const messages = userData.messages;
-  // console.log(messages);
+  console.log(messages);
   const handleClose = () =>{
     setdrawOpen(false);
   }

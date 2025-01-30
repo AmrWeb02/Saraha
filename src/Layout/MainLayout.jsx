@@ -75,7 +75,7 @@ export const MainLayout = () => {
             <NavLink to='/profile' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Profile</NavLink>
             <NavLink to='/profile-password' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Security</NavLink>
             <NavLink to='/home' className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Home</NavLink>
-            <NavLink to='/login' onClick={()=>{window.localStorage.removeItem("token")}} className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Sign out</NavLink>
+            <NavLink to='/' onClick={()=>{window.localStorage.removeItem("token")}} className="glassStyle" style={{borderRadius:"0",width:"100%", marginBottom:"25px"}}>Sign out</NavLink>
             </nav>
 
           </Drawer>
