@@ -80,7 +80,7 @@ const Profile = () => {
     <>
       { !userObject && <Typography variant='h4' color="error" sx={{alignSelf:"center"}}>Error fetching data from the server</Typography>}
       { userObject && <Box component="div" sx={{display:"flex", justifyContent:"center",height:"100%",padding:"25px"}}>
-        <Box component="div" sx={{backgroundColor:"white", borderRadius:"20px",padding:"20px", width:"95%",}}>
+        <Box component="div" sx={{overflowY:"auto", backgroundColor:"white", borderRadius:"20px",padding:"20px", width:"95%",}}>
           {/* Data container */}
           <Box componenet="div" sx={{position:"relative"}}>
             <Box componenet="div" sx={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}>
