@@ -47,7 +47,8 @@ const Home = () => {
   return (
     <>
         <Box component="div" sx={{display:"flex", justifyContent:"center",backgroundColor:"primary.light",height:"100%",width:"100%",}}>
-          <Box component="div" sx={{display:"flex",alignItems:"flex-start",justifyContent:"center",flexWrap:"wrap",margin:"auto 0",height:"95%",overflowY:"scroll",backgroundColor:"primary.main", width:{xs:"95%",}}}>
+          <Box component="div" sx={{display:"flex",alignItems:"flex-start",justifyContent:"center",flexWrap:"wrap",margin:"auto 0",height:"95%",overflowY:"auto",backgroundColor:"primary.main", width:{xs:"95%",}}}>
+            { !messages && <h3>You have no messages</h3>}
             {messages.slice().reverse().map((message,index)=>{return <MsgCard key={message._id} clickFunc={()=>{handleCardClick(message)}} deleteFunc={(e)=>{deleteMsg(e,message._id)}} msg={message.message} time={message.createdAt}/>})}
           </Box>
             <Drawer open={drawOpen} onClose={handleClose} anchor={isMobile? "bottom":"right"} PaperProps={{
