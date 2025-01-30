@@ -52,8 +52,8 @@ const ForgotPassword = () => {
             <TextField label="Password" type="password" name="password" value={resetData.password} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"250px",marginBottom:"20px",}}/>
             <TextField label="Confirmed Password" type="password" name="confirmedPass" value={resetData.confirmedPass} onChange={(e)=>{InputHandler(e)}} sx={{...styleObj, width:"250px"}}/>
         </ResetGuide>}
-        {stepNumber===3 &&  <><h3 style={{margin:"20px 0",textAlign:"center"}}>Your password has been successfully reset. You can now log in with your new password.</h3>
-        <SubmitBtn label="login" formValidator={ ()=>{navigate('/login')}}/></>}
+        {stepNumber===3 &&  <div style={{marginBottom:"20px"}}><h3 style={{margin:"20px 0",textAlign:"center"}}>Your password has been successfully reset. You can now log in with your new password.</h3>
+        <SubmitBtn label="login" formValidator={ ()=>{navigate('/login')}}/></div>}
 
        <Box component="div" sx={{backgroundColor:"primary.accent"}} style={{width:"100%", height:"50px", position:"absolute",bottom:"0px",}}></Box>
      </Card>
